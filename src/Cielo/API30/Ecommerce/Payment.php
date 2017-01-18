@@ -82,6 +82,8 @@ class Payment implements \JsonSerializable
 
     private $number;
 
+    private $boletoNumber;
+
     private $barCodeNumber;
 
     private $digitableLine;
@@ -123,6 +125,13 @@ class Payment implements \JsonSerializable
             $this->debitCard = new CreditCard();
             $this->debitCard->populate($data->DebitCard);
         }
+        
+        $this->expirationDate  =  isset($data->ExpirationDate)?$data->ExpirationDate: null;
+        $this->url             =  isset($data->Url)?$data->ExpirationDate: null;
+        $this->boletoNumber    =  isset($data->BoletoNumber)? $data->BoletoNumber: null;
+        $this->barCodeNumber   =  isset($data->BarCodeNumber)?$data->BarCodeNumber: null;
+        $this->digitableLine   =  isset($data->DigitableLine)?$data->DigitableLine: null;
+        $this->address         =  isset($data->Address)?$data->Address: null;
 
         $this->authenticationUrl = isset($data->AuthenticationUrl)? $data->AuthenticationUrl: null;
         $this->tid = isset($data->Tid)? $data->Tid: null;
@@ -544,6 +553,17 @@ class Payment implements \JsonSerializable
     public function setNumber($number)
     {
         $this->number = $number;
+        return $this;
+    }    
+            
+    public function getBoletoNumber()
+    {
+        return $this->boletoNumber;
+    }
+    
+    public function setBoletoNumber($boletoNumber)
+    {
+        $this->boletoNumber = $boletoNumber;
         return $this;
     }
 
