@@ -127,7 +127,7 @@ class Payment implements \JsonSerializable
         }
         
         $this->expirationDate  =  isset($data->ExpirationDate)?$data->ExpirationDate: null;
-        $this->url             =  isset($data->Url)?$data->ExpirationDate: null;
+        $this->url             =  isset($data->Url)?$data->Url: null;
         $this->boletoNumber    =  isset($data->BoletoNumber)? $data->BoletoNumber: null;
         $this->barCodeNumber   =  isset($data->BarCodeNumber)?$data->BarCodeNumber: null;
         $this->digitableLine   =  isset($data->DigitableLine)?$data->DigitableLine: null;
