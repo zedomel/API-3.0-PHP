@@ -18,6 +18,32 @@ SDK API-3.0 PHP
 
 Por envolver a interface de usuário da aplicação, o SDK funciona apenas como um framework para criação das transações. Nos casos onde a autorização é direta, não há limitação; mas nos casos onde é necessário a autenticação ou qualquer tipo de redirecionamento do usuário, o desenvolvedor deverá utilizar o SDK para gerar o pagamento e, com o link retornado pela Cielo, providenciar o redirecionamento do usuário.
 
+## Dependências
+
+* PHP >= 5.6
+
+## Instalando o SDK
+
+Se já possui um arquivo `composer.json`, basta adicionar a seguinte dependência ao seu projeto:
+
+```json
+"require": {
+    "developercielo/api-3.0-php": "^1.0"
+}
+```
+
+Com a dependência adicionada ao `composer.json`, basta executar:
+
+```
+composer install
+```
+
+Alternativamente, você pode executar diretamente em seu terminal:
+
+```
+composer require "developercielo/api-3.0-php"
+```
+
 ## Utilizando o SDK
 
 Para criar um pagamento simples com cartão de crédito com o SDK, basta fazer:
