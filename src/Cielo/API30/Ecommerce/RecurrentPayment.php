@@ -62,8 +62,8 @@ class RecurrentPayment implements \JsonSerializable
         $this->recurrencyDay = isset($data->RecurrencyDay)? $data->RecurrencyDay: null;
         $this->successfulRecurrences = isset($data->SuccessfulRecurrences)? $data->SuccessfulRecurrences: null;
 
-        $this->links = isset($data->Interval)? $data->Interval: [];
-        $this->recurrentTransactions = isset($data->Interval)? $data->Interval: [];
+        $this->links = isset($data->Links)? $data->Links: [];
+        $this->recurrentTransactions = isset($data->RecurrentTransactions)? $data->RecurrentTransactions: [];
 
         $this->reasonCode = isset($data->ReasonCode)? $data->ReasonCode: null;
         $this->reasonMessage = isset($data->ReasonMessage)? $data->ReasonMessage: null;
@@ -98,7 +98,7 @@ class RecurrentPayment implements \JsonSerializable
         return $this->reasonMessage;
     }
 
-    public function gerNextRecurrency()
+    public function getNextRecurrency()
     {
         return $this->nextRecurrency;
     }
@@ -141,6 +141,11 @@ class RecurrentPayment implements \JsonSerializable
     public function getSuccessfulRecurrences()
     {
         return $this->successfulRecurrences;
+    }
+
+    public function getStatus()
+    {
+        return $this->status;
     }
 
     public function getAuthorizeNow()
