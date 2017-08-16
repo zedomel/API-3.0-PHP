@@ -62,8 +62,8 @@ class RecurrentPayment implements \JsonSerializable
         $this->recurrencyDay = isset($data->RecurrencyDay)? $data->RecurrencyDay: null;
         $this->successfulRecurrences = isset($data->SuccessfulRecurrences)? $data->SuccessfulRecurrences: null;
 
-        $this->links = isset($data->Interval)? $data->Interval: [];
-        $this->recurrentTransactions = isset($data->Interval)? $data->Interval: [];
+        $this->links = isset($data->Links)? $data->Links: [];
+        $this->recurrentTransactions = isset($data->RecurrentTransactions)? $data->RecurrentTransactions: [];
 
         $this->reasonCode = isset($data->ReasonCode)? $data->ReasonCode: null;
         $this->reasonMessage = isset($data->ReasonMessage)? $data->ReasonMessage: null;
