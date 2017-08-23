@@ -155,7 +155,7 @@ try {
     // Configure o SDK com seu merchant e o ambiente apropriado para criar a venda
     $sale = (new CieloEcommerce($merchant, $environment))->createSale($sale);
 
-    $recurrentPaymentId = $sale->getPayment()->getRecurrentPayment()->getRecurrentPaymentId;
+    $recurrentPaymentId = $sale->getPayment()->getRecurrentPayment()->getRecurrentPaymentId();
 } catch (CieloRequestException $e) {
     // Em caso de erros de integração, podemos tratar o erro aqui.
     // os códigos de erro estão todos disponíveis no manual de integração.
