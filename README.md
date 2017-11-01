@@ -108,7 +108,7 @@ try {
 // ...
 ```
 
-### Criando um pagamento com cartão de crédito
+### Criando um pagamento e gerando o token do cartão de crédito
 
 ```php
 <?php
