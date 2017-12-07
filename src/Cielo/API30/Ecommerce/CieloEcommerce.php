@@ -166,8 +166,8 @@ class CieloEcommerce
      */
     public function tokenizeCard(CreditCard $card)
     {
-        $updateSaleRequest = new TokenizeCardRequest($this->merchant, $this->environment);
+        $tokenizeCardRequest = new TokenizeCardRequest($this->merchant, $this->environment);
 
-        return $updateSaleRequest->execute($card);
+        return $tokenizeCardRequest->execute($card);
     }
 }
