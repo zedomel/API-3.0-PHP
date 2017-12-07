@@ -13,6 +13,7 @@ SDK API-3.0 PHP
 * [x] Pagamentos por transferência eletrônica.
 * [x] Cancelamento de autorização.
 * [x] Consulta de pagamentos.
+* [x] Tokenização de cartão.
 
 ## Limitações
 
@@ -397,6 +398,52 @@ try {
     // os códigos de erro estão todos disponíveis no manual de integração.
     $error = $e->getCieloError();
 }
+```
+
+### Tokenizando um cartão
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+use Cielo\API30\Merchant;
+
+use Cielo\API30\Ecommerce\Environment;
+use Cielo\API30\Ecommerce\CreditCard;
+use Cielo\API30\Ecommerce\CieloEcommerce;
+use Cielo\API30\Ecommerce\Request\TokenizeCardRequest;
+
+use Cielo\API30\Ecommerce\Request\CieloRequestException;
+
+// ...
+// ...
+// Configure o ambiente
+$environment = Environment::sandbox();
+
+// Configure seu merchant
+$merchant = new Merchant('MID', 'MKEY');
+
+// Crie uma instância do objeto que irá retornar o token do cartão 
+$card = new CreditCard();
+$card->setCustomerName('Fulano de Tal');
+$card->setCardNumber('0000000000000001');
+$card->setHolder('Fulano de Tal');
+$card->setExpirationDate('10/2020');
+$card->setBrand('Visa');
+
+try {
+    // Configure o SDK com seu merchant e o ambiente apropriado para recuperar o cartão
+    $card = (new CieloEcommerce($merchant, $environment))->tokenizeCard($card);
+
+    // Get the token
+    $cardToken = $card->getCardToken();
+} catch (CieloRequestException $e) {
+    // Em caso de erros de integração, podemos tratar o erro aqui.
+    // os códigos de erro estão todos disponíveis no manual de integração.
+    $error = $e->getCieloError();
+}
+// ...
 ```
 
 ## Manual

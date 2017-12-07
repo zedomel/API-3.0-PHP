@@ -1,4 +1,5 @@
 <?php
+
 namespace Cielo\API30\Ecommerce;
 
 /**
@@ -6,22 +7,35 @@ namespace Cielo\API30\Ecommerce;
  *
  * @package Cielo\API30\Ecommerce
  */
-class CreditCard implements \JsonSerializable
+class CreditCard implements \JsonSerializable, CieloSerializable
 {
 
+    /** @var string $cardNumber */
     private $cardNumber;
 
+    /** @var string $holder */
     private $holder;
 
+    /** @var string $expirationDate */
     private $expirationDate;
 
+    /** @var string $securityCode */
     private $securityCode;
 
+    /** @var bool $saveCard */
     private $saveCard = false;
 
+    /** @var string $brand */
     private $brand;
 
+    /** @var string $cardToken */
     private $cardToken;
+
+    /** @var string $customerName */
+    private $customerName;
+
+    /** @var \stdClass $links */
+    private $links;
 
     /**
      * @return array
@@ -32,7 +46,7 @@ class CreditCard implements \JsonSerializable
     }
 
     /**
-     * @param \stdClass $data
+     * @inheritdoc
      */
     public function populate(\stdClass $data)
     {
@@ -43,6 +57,8 @@ class CreditCard implements \JsonSerializable
         $this->saveCard = isset($data->SaveCard)? !!$data->SaveCard: false;
         $this->brand = isset($data->Brand)? $data->Brand: null;
         $this->cardToken = isset($data->CardToken)? $data->CardToken: null;
+        $this->links = isset($data->Links)? $data->Links : new \stdClass();
+        $this->customerName = isset($data->CustomerName)? $data->CustomerName : null;
     }
 
     /**
@@ -176,5 +192,50 @@ class CreditCard implements \JsonSerializable
     {
         $this->cardToken = $cardToken;
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCustomerName()
+    {
+        return $this->customerName;
+    }
+
+    /**
+     * @param string $customerName
+     */
+    public function setCustomerName($customerName)
+    {
+        $this->customerName = $customerName;
+    }
+
+    /**
+     * @return \stdClass
+     */
+    public function getLinks()
+    {
+        return $this->links;
+    }
+
+    /**
+     * @param \stdClass $links
+     */
+    public function setLinks($links)
+    {
+        $this->links = $links;
+    }
+
+    /**
+     * @param string $json
+     * @return CreditCard
+     */
+    public static function fromJson($json)
+    {
+        $object = \json_decode($json);
+        $cardToken = new CreditCard();
+        $cardToken->populate($object);
+
+        return $cardToken;
     }
 }

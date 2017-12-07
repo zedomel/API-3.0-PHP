@@ -1,6 +1,8 @@
 <?php
+
 namespace Cielo\API30\Ecommerce;
 
+use Cielo\API30\Ecommerce\Request\TokenizeCardRequest;
 use Cielo\API30\Merchant;
 use Cielo\API30\Ecommerce\Request\CreateSaleRequest;
 use Cielo\API30\Ecommerce\Request\QuerySaleRequest;
@@ -156,5 +158,16 @@ class CieloEcommerce
         $updateSaleRequest->setServiceTaxAmount($serviceTaxAmount);
 
         return $updateSaleRequest->execute($paymentId);
+    }
+
+    /**
+     * @param CreditCard $card
+     * @return CreditCard
+     */
+    public function tokenizeCard(CreditCard $card)
+    {
+        $tokenizeCardRequest = new TokenizeCardRequest($this->merchant, $this->environment);
+
+        return $tokenizeCardRequest->execute($card);
     }
 }
