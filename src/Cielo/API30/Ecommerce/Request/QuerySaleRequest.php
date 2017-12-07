@@ -1,7 +1,6 @@
 <?php
 namespace Cielo\API30\Ecommerce\Request;
 
-use Cielo\API30\Ecommerce\Request\AbstractSaleRequest;
 use Cielo\API30\Environment;
 use Cielo\API30\Merchant;
 use Cielo\API30\Ecommerce\Sale;
@@ -11,7 +10,7 @@ use Cielo\API30\Ecommerce\Sale;
  *
  * @package Cielo\API30\Ecommerce\Request
  */
-class QuerySaleRequest extends AbstractSaleRequest
+class QuerySaleRequest extends AbstractRequest
 {
 
     private $environment;
