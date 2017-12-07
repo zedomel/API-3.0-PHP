@@ -429,6 +429,7 @@ $this->createCardTokenRequestHandler = new TokenizeCardRequest($merchant, $envir
 
 // Crie uma instância do objeto que irá retornar o token do cartão 
 $card = new CreditCard();
+$card->setCustomerName('Fulano de Tal');
 $card->setCardNumber('0000000000000001');
 $card->setHolder('Fulano de Tal');
 $card->setExpirationDate('10/2020');
