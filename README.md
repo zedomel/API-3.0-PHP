@@ -424,9 +424,6 @@ $environment = Environment::sandbox();
 // Configure seu merchant
 $merchant = new Merchant('MID', 'MKEY');
 
-$this->cieloEcommerce = new CieloEcommerce($merchant, $environment);
-$this->createCardTokenRequestHandler = new TokenizeCardRequest($merchant, $environment);
-
 // Crie uma instância do objeto que irá retornar o token do cartão 
 $card = new CreditCard();
 $card->setCustomerName('Fulano de Tal');
