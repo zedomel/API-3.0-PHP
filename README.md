@@ -412,7 +412,7 @@ use Cielo\API30\Merchant;
 use Cielo\API30\Ecommerce\Environment;
 use Cielo\API30\Ecommerce\Card;
 use Cielo\API30\Ecommerce\CieloEcommerce;
-use AppBundle\Handler\Cielo\TokenizeCardRequest;
+use Cielo\API30\Ecommerce\Request\TokenizeCardRequest;
 
 use Cielo\API30\Ecommerce\Request\CieloRequestException;
 

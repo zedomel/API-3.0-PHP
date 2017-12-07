@@ -1,10 +1,9 @@
 <?php
 
-namespace AppBundle\Handler\Cielo;
+namespace Cielo\API30\Ecommerce\Request;
 
 use Cielo\API30\Ecommerce\Card;
 use Cielo\API30\Ecommerce\Environment;
-use Cielo\API30\Ecommerce\Request\AbstractRequest;
 use Cielo\API30\Merchant;
 
 /**
