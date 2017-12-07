@@ -7,7 +7,7 @@ namespace Cielo\API30\Ecommerce;
  *
  * @package Cielo\API30\Ecommerce
  */
-class CreditCard implements \JsonSerializable
+class CreditCard implements \JsonSerializable, CieloSerializable
 {
 
     /** @var string $cardNumber */
@@ -46,7 +46,7 @@ class CreditCard implements \JsonSerializable
     }
 
     /**
-     * @param \stdClass $data
+     * @inheritdoc
      */
     public function populate(\stdClass $data)
     {
