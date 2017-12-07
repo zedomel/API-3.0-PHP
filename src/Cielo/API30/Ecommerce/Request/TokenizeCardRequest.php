@@ -2,7 +2,7 @@
 
 namespace Cielo\API30\Ecommerce\Request;
 
-use Cielo\API30\Ecommerce\Card;
+use Cielo\API30\Ecommerce\CreditCard;
 use Cielo\API30\Ecommerce\Environment;
 use Cielo\API30\Merchant;
 
@@ -45,6 +45,6 @@ class TokenizeCardRequest extends AbstractRequest
      */
     protected function unserialize($json)
     {
-        return Card::fromJson($json);
+        return CreditCard::fromJson($json);
     }
 }

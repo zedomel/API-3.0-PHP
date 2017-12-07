@@ -410,7 +410,7 @@ require 'vendor/autoload.php';
 use Cielo\API30\Merchant;
 
 use Cielo\API30\Ecommerce\Environment;
-use Cielo\API30\Ecommerce\Card;
+use Cielo\API30\Ecommerce\CreditCard;
 use Cielo\API30\Ecommerce\CieloEcommerce;
 use Cielo\API30\Ecommerce\Request\TokenizeCardRequest;
 
@@ -428,8 +428,7 @@ $this->cieloEcommerce = new CieloEcommerce($merchant, $environment);
 $this->createCardTokenRequestHandler = new TokenizeCardRequest($merchant, $environment);
 
 // Crie uma instância do objeto que irá retornar o token do cartão 
-$card = new Card();
-$card->setCustomerName('Fulano de Tal');
+$card = new CreditCard();
 $card->setCardNumber('0000000000000001');
 $card->setHolder('Fulano de Tal');
 $card->setExpirationDate('10/2020');

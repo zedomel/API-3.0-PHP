@@ -1,7 +1,8 @@
 <?php
+
 namespace Cielo\API30\Ecommerce;
 
-use AppBundle\Handler\Cielo\TokenizeCardRequest;
+use Cielo\API30\Ecommerce\Request\TokenizeCardRequest;
 use Cielo\API30\Merchant;
 use Cielo\API30\Ecommerce\Request\CreateSaleRequest;
 use Cielo\API30\Ecommerce\Request\QuerySaleRequest;
@@ -160,10 +161,10 @@ class CieloEcommerce
     }
 
     /**
-     * @param Card $card
-     * @return Card
+     * @param CreditCard $card
+     * @return CreditCard
      */
-    public function tokenizeCard(Card $card)
+    public function tokenizeCard(CreditCard $card)
     {
         $updateSaleRequest = new TokenizeCardRequest($this->merchant, $this->environment);
 
