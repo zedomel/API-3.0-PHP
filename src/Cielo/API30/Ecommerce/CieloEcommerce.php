@@ -2,12 +2,12 @@
 
 namespace Cielo\API30\Ecommerce;
 
-use Cielo\API30\Ecommerce\Request\TokenizeCardRequest;
-use Cielo\API30\Merchant;
 use Cielo\API30\Ecommerce\Request\CreateSaleRequest;
-use Cielo\API30\Ecommerce\Request\QuerySaleRequest;
-use Cielo\API30\Ecommerce\Request\UpdateSaleRequest;
 use Cielo\API30\Ecommerce\Request\QueryRecurrentPaymentRequest;
+use Cielo\API30\Ecommerce\Request\QuerySaleRequest;
+use Cielo\API30\Ecommerce\Request\TokenizeCardRequest;
+use Cielo\API30\Ecommerce\Request\UpdateSaleRequest;
+use Cielo\API30\Merchant;
 
 /**
  * The Cielo Ecommerce SDK front-end;
@@ -35,7 +35,7 @@ class CieloEcommerce
             $environment = Environment::production();
         }
 
-        $this->merchant = $merchant;
+        $this->merchant    = $merchant;
         $this->environment = $environment;
     }
 
@@ -107,7 +107,7 @@ class CieloEcommerce
     /**
      * Cancel a Sale on Cielo by paymentId and speficying the amount
      *
-     * @param string $paymentId
+     * @param string  $paymentId
      *            The paymentId to be queried
      * @param integer $amount
      *            Order value in cents
@@ -133,7 +133,7 @@ class CieloEcommerce
      * Capture a Sale on Cielo by paymentId and specifying the amount and the
      * serviceTaxAmount
      *
-     * @param string $paymentId
+     * @param string  $paymentId
      *            The paymentId to be captured
      * @param integer $amount
      *            Amount of the authorization to be captured
@@ -162,6 +162,7 @@ class CieloEcommerce
 
     /**
      * @param CreditCard $card
+     *
      * @return CreditCard
      */
     public function tokenizeCard(CreditCard $card)

@@ -32,15 +32,8 @@ abstract class AbstractRequest
     public abstract function execute($param);
 
     /**
-     * @param $json
-     *
-     * @return mixed
-     */
-    protected abstract function unserialize($json);
-
-    /**
-     * @param $method
-     * @param $url
+     * @param                        $method
+     * @param                        $url
      * @param \JsonSerializable|null $content
      *
      * @return mixed
@@ -85,7 +78,7 @@ abstract class AbstractRequest
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
-        $response = curl_exec($curl);
+        $response   = curl_exec($curl);
         $statusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
         if (curl_errno($curl)) {
@@ -116,11 +109,11 @@ abstract class AbstractRequest
                 break;
             case 400:
                 $exception = null;
-                $response = json_decode($responseBody);
+                $response  = json_decode($responseBody);
 
                 foreach ($response as $error) {
                     $cieloError = new CieloError($error->Message, $error->Code);
-                    $exception = new CieloRequestException('Request Error', $statusCode, $exception);
+                    $exception  = new CieloRequestException('Request Error', $statusCode, $exception);
                     $exception->setCieloError($cieloError);
                 }
 
@@ -133,4 +126,11 @@ abstract class AbstractRequest
 
         return $unserialized;
     }
+
+    /**
+     * @param $json
+     *
+     * @return mixed
+     */
+    protected abstract function unserialize($json);
 }

@@ -1,9 +1,10 @@
 <?php
+
 namespace Cielo\API30\Ecommerce\Request;
 
+use Cielo\API30\Ecommerce\Sale;
 use Cielo\API30\Environment;
 use Cielo\API30\Merchant;
-use Cielo\API30\Ecommerce\Sale;
 
 /**
  * Class QuerySaleRequest
@@ -18,7 +19,7 @@ class QuerySaleRequest extends AbstractRequest
     /**
      * QuerySaleRequest constructor.
      *
-     * @param Merchant $merchant
+     * @param Merchant    $merchant
      * @param Environment $environment
      */
     public function __construct(Merchant $merchant, Environment $environment)
@@ -32,6 +33,8 @@ class QuerySaleRequest extends AbstractRequest
      * @param $paymentId
      *
      * @return null
+     * @throws \Cielo\API30\Ecommerce\Request\CieloRequestException
+     * @throws \RuntimeException
      */
     public function execute($paymentId)
     {

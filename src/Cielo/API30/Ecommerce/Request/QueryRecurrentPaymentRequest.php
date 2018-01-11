@@ -1,10 +1,10 @@
 <?php
+
 namespace Cielo\API30\Ecommerce\Request;
 
-use Cielo\API30\Ecommerce\Request\AbstractRequest;
+use Cielo\API30\Ecommerce\RecurrentPayment;
 use Cielo\API30\Environment;
 use Cielo\API30\Merchant;
-use Cielo\API30\Ecommerce\RecurrentPayment;
 
 /**
  * Class QueryRecurrentPaymentRequest
@@ -19,7 +19,7 @@ class QueryRecurrentPaymentRequest extends AbstractRequest
     /**
      * QueryRecurrentPaymentRequest constructor.
      *
-     * @param Merchant $merchant
+     * @param Merchant    $merchant
      * @param Environment $environment
      */
     public function __construct(Merchant $merchant, Environment $environment)
@@ -33,6 +33,8 @@ class QueryRecurrentPaymentRequest extends AbstractRequest
      * @param $recurrentPaymentId
      *
      * @return null
+     * @throws \Cielo\API30\Ecommerce\Request\CieloRequestException
+     * @throws \RuntimeException
      */
     public function execute($recurrentPaymentId)
     {

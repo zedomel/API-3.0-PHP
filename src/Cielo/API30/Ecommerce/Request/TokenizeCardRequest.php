@@ -8,6 +8,7 @@ use Cielo\API30\Merchant;
 
 /**
  * Class CreateCardTokenRequestHandler
+ *
  * @package AppBundle\Handler\Cielo
  */
 class TokenizeCardRequest extends AbstractRequest
@@ -19,14 +20,15 @@ class TokenizeCardRequest extends AbstractRequest
 
     /**
      * CreateCardTokenRequestHandler constructor.
-     * @param Merchant $merchant
+     *
+     * @param Merchant    $merchant
      * @param Environment $environment
      */
     public function __construct(Merchant $merchant, Environment $environment)
     {
         parent::__construct($merchant);
 
-        $this->merchant = $merchant;
+        $this->merchant    = $merchant;
         $this->environment = $environment;
     }
 

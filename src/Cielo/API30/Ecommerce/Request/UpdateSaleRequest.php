@@ -1,9 +1,10 @@
 <?php
+
 namespace Cielo\API30\Ecommerce\Request;
 
+use Cielo\API30\Ecommerce\Payment;
 use Cielo\API30\Environment;
 use Cielo\API30\Merchant;
-use Cielo\API30\Ecommerce\Payment;
 
 /**
  * Class UpdateSaleRequest
@@ -24,8 +25,8 @@ class UpdateSaleRequest extends AbstractRequest
     /**
      * UpdateSaleRequest constructor.
      *
-     * @param Merchant $type
-     * @param Merchant $merchant
+     * @param Merchant    $type
+     * @param Merchant    $merchant
      * @param Environment $environment
      */
     public function __construct($type, Merchant $merchant, Environment $environment)
@@ -33,17 +34,19 @@ class UpdateSaleRequest extends AbstractRequest
         parent::__construct($merchant);
 
         $this->environment = $environment;
-        $this->type = $type;
+        $this->type        = $type;
     }
 
     /**
      * @param $paymentId
      *
      * @return null
+     * @throws \Cielo\API30\Ecommerce\Request\CieloRequestException
+     * @throws \RuntimeException
      */
     public function execute($paymentId)
     {
-        $url = $this->environment->getApiUrl() . '1/sales/' . $paymentId . '/' . $this->type;
+        $url    = $this->environment->getApiUrl() . '1/sales/' . $paymentId . '/' . $this->type;
         $params = [];
 
         if ($this->amount != null) {
@@ -85,6 +88,7 @@ class UpdateSaleRequest extends AbstractRequest
     public function setServiceTaxAmount($serviceTaxAmount)
     {
         $this->serviceTaxAmount = $serviceTaxAmount;
+
         return $this;
     }
 
@@ -104,6 +108,7 @@ class UpdateSaleRequest extends AbstractRequest
     public function setAmount($amount)
     {
         $this->amount = $amount;
+
         return $this;
     }
 }
