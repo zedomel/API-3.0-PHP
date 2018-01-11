@@ -45,6 +45,26 @@ Alternativamente, você pode executar diretamente em seu terminal:
 composer require "developercielo/api-3.0-php"
 ```
 
+## Produtos e Bandeiras suportadas e suas constantes
+
+```php
+<?php
+require 'vendor/autoload.php';
+
+use Cielo\API30\Ecommerce\CreditCard;
+```
+
+| Bandeira         | Constante              | Crédito à vista | Crédito parcelado Loja | Débito | Voucher |
+|------------------|------------------------|-----------------|------------------------|--------|---------|
+| Visa             | CreditCard::VISA       | Sim             | Sim                    | Sim    | *Não*   |
+| Master Card      | CreditCard::MASTERCARD | Sim             | Sim                    | Sim    | *Não*   |
+| American Express | CreditCard::AMEX       | Sim             | Sim                    | *Não*  | *Não*   |
+| Elo              | CreditCard::ELO        | Sim             | Sim                    | *Não*  | *Não*   |
+| Diners Club      | CreditCard::DINERS     | Sim             | Sim                    | *Não*  | *Não*   |
+| Discover         | CreditCard::DISCOVER   | Sim             | *Não*                  | *Não*  | *Não*   |
+| JCB              | CreditCard::JCB        | Sim             | Sim                    | *Não*  | *Não*   |
+| Aura             | CreditCard::AURA       | Sim             | Sim                    | *Não*  | *Não*   |
+
 ## Utilizando o SDK
 
 Para criar um pagamento simples com cartão de crédito com o SDK, basta fazer:
@@ -61,6 +81,7 @@ use Cielo\API30\Ecommerce\Environment;
 use Cielo\API30\Ecommerce\Sale;
 use Cielo\API30\Ecommerce\CieloEcommerce;
 use Cielo\API30\Ecommerce\Payment;
+use Cielo\API30\Ecommerce\CreditCard;
 
 use Cielo\API30\Ecommerce\Request\CieloRequestException;
 // ...
@@ -82,7 +103,7 @@ $payment = $sale->payment(15700);
 // Crie uma instância de Credit Card utilizando os dados de teste
 // esses dados estão disponíveis no manual de integração
 $payment->setType(Payment::PAYMENTTYPE_CREDITCARD)
-        ->creditCard("123", "Visa")
+        ->creditCard("123", CreditCard::VISA)
         ->setExpirationDate("12/2018")
         ->setCardNumber("0000000000000001")
         ->setHolder("Fulano de Tal");
@@ -121,6 +142,7 @@ use Cielo\API30\Ecommerce\Environment;
 use Cielo\API30\Ecommerce\Sale;
 use Cielo\API30\Ecommerce\CieloEcommerce;
 use Cielo\API30\Ecommerce\Payment;
+use Cielo\API30\Ecommerce\CreditCard;
 
 use Cielo\API30\Ecommerce\Request\CieloRequestException;
 // ...
@@ -143,7 +165,7 @@ $payment = $sale->payment(15700);
 // esses dados estão disponíveis no manual de integração.
 // Utilize setSaveCard(true) para obter o token do cartão
 $payment->setType(Payment::PAYMENTTYPE_CREDITCARD)
-        ->creditCard("123", "Visa")
+        ->creditCard("123", CreditCard::VISA)
         ->setExpirationDate("12/2018")
         ->setCardNumber("0000000000000001")
         ->setHolder("Fulano de Tal")
@@ -176,6 +198,7 @@ use Cielo\API30\Ecommerce\Environment;
 use Cielo\API30\Ecommerce\Sale;
 use Cielo\API30\Ecommerce\CieloEcommerce;
 use Cielo\API30\Ecommerce\Payment;
+use Cielo\API30\Ecommerce\CreditCard;
 
 use Cielo\API30\Ecommerce\Request\CieloRequestException;
 // ...
@@ -197,7 +220,7 @@ $payment = $sale->payment(15700);
 // Crie uma instância de Credit Card utilizando os dados de teste
 // esses dados estão disponíveis no manual de integração
 $payment->setType(Payment::PAYMENTTYPE_CREDITCARD)
-        ->creditCard("123", "Visa")
+        ->creditCard("123", CreditCard::VISA)
         ->setCardToken("TOKEN-PREVIAMENTE-ARMAZENADO");
 
 // Crie o pagamento na Cielo
@@ -228,6 +251,7 @@ use Cielo\API30\Ecommerce\Environment;
 use Cielo\API30\Ecommerce\Sale;
 use Cielo\API30\Ecommerce\CieloEcommerce;
 use Cielo\API30\Ecommerce\Payment;
+use Cielo\API30\Ecommerce\CreditCard;
 
 use Cielo\API30\Ecommerce\Request\CieloRequestException;
 // ...
@@ -250,7 +274,7 @@ $payment = $sale->payment(15700);
 // Crie uma instância de Credit Card utilizando os dados de teste
 // esses dados estão disponíveis no manual de integração
 $payment->setType(Payment::PAYMENTTYPE_CREDITCARD)
-        ->creditCard("123", "Visa")
+        ->creditCard("123", CreditCard::VISA)
         ->setExpirationDate("12/2018")
         ->setCardNumber("0000000000000001")
         ->setHolder("Fulano de Tal");
@@ -283,7 +307,7 @@ use Cielo\API30\Merchant;
 use Cielo\API30\Ecommerce\Environment;
 use Cielo\API30\Ecommerce\Sale;
 use Cielo\API30\Ecommerce\CieloEcommerce;
-use Cielo\API30\Ecommerce\Payment;
+use Cielo\API30\Ecommerce\CreditCard;
 
 use Cielo\API30\Ecommerce\Request\CieloRequestException;
 
@@ -309,7 +333,7 @@ $payment->setReturnUrl('https://localhost/test');
 
 // Crie uma instância de Debit Card utilizando os dados de teste
 // esses dados estão disponíveis no manual de integração
-$payment->debitCard("123", "Visa")
+$payment->debitCard("123", CreditCard::VISA)
         ->setExpirationDate("12/2018")
         ->setCardNumber("0000000000000001")
         ->setHolder("Fulano de Tal");
@@ -412,7 +436,7 @@ use Cielo\API30\Merchant;
 use Cielo\API30\Ecommerce\Environment;
 use Cielo\API30\Ecommerce\CreditCard;
 use Cielo\API30\Ecommerce\CieloEcommerce;
-use Cielo\API30\Ecommerce\Request\TokenizeCardRequest;
+use Cielo\API30\Ecommerce\CreditCard;
 
 use Cielo\API30\Ecommerce\Request\CieloRequestException;
 
@@ -430,7 +454,7 @@ $card->setCustomerName('Fulano de Tal');
 $card->setCardNumber('0000000000000001');
 $card->setHolder('Fulano de Tal');
 $card->setExpirationDate('10/2020');
-$card->setBrand('Visa');
+$card->setBrand(CreditCard::VISA);
 
 try {
     // Configure o SDK com seu merchant e o ambiente apropriado para recuperar o cartão
@@ -448,4 +472,4 @@ try {
 
 ## Manual
 
-Para mais informações sobre a integração com a API 3.0 da Cielo, vide o manual em: [Integração API 3.0](https://developercielo.github.io/Webservice-3.0/)
+Para mais informações sobre a integração com a API 3.0 da Cielo, vide o manual em: [Integração API 3.0](https://developercielo.github.io/manual/cielo-ecommerce)

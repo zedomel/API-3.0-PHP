@@ -9,6 +9,50 @@ namespace Cielo\API30\Ecommerce;
  */
 class CreditCard implements \JsonSerializable, CieloSerializable
 {
+    /**
+     * Bandeira Visa
+     */
+    const VISA = 'Visa';
+
+    /**
+     * Bandeira Mastercard
+     */
+    const MASTERCARD = 'Master';
+
+    /**
+     * Bandeira American Express
+     */
+    const AMEX = 'Amex';
+
+    /**
+     * Bandeira ELO
+     */
+    const ELO = 'Elo';
+
+    /**
+     * Bandeira Aura
+     */
+    const AURA = 'Aura';
+
+    /**
+     * Bandeira JCB
+     */
+    const JCB = 'JCB';
+
+    /**
+     * Bandeira Diners
+     */
+    const DINERS = 'Diners';
+
+    /**
+     * Bandeira Discover
+     */
+    const DISCOVER = 'Discover';
+
+    /**
+     * Bandeira Hipercard
+     */
+    const HIPERCARD = 'Hipercard';
 
     /** @var string $cardNumber */
     private $cardNumber;
@@ -38,11 +82,17 @@ class CreditCard implements \JsonSerializable, CieloSerializable
     private $links;
 
     /**
-     * @return array
+     * @param string $json
+     *
+     * @return CreditCard
      */
-    public function jsonSerialize()
+    public static function fromJson($json)
     {
-        return get_object_vars($this);
+        $object    = \json_decode($json);
+        $cardToken = new CreditCard();
+        $cardToken->populate($object);
+
+        return $cardToken;
     }
 
     /**
@@ -50,15 +100,23 @@ class CreditCard implements \JsonSerializable, CieloSerializable
      */
     public function populate(\stdClass $data)
     {
-        $this->cardNumber = isset($data->CardNumber)? $data->CardNumber: null;
-        $this->holder = isset($data->Holder)? $data->Holder: null;
-        $this->expirationDate = isset($data->ExpirationDate)? $data->ExpirationDate: null;
-        $this->securityCode = isset($data->SecurityCode)? $data->SecurityCode: null;
-        $this->saveCard = isset($data->SaveCard)? !!$data->SaveCard: false;
-        $this->brand = isset($data->Brand)? $data->Brand: null;
-        $this->cardToken = isset($data->CardToken)? $data->CardToken: null;
-        $this->links = isset($data->Links)? $data->Links : new \stdClass();
-        $this->customerName = isset($data->CustomerName)? $data->CustomerName : null;
+        $this->cardNumber     = isset($data->CardNumber) ? $data->CardNumber : null;
+        $this->holder         = isset($data->Holder) ? $data->Holder : null;
+        $this->expirationDate = isset($data->ExpirationDate) ? $data->ExpirationDate : null;
+        $this->securityCode   = isset($data->SecurityCode) ? $data->SecurityCode : null;
+        $this->saveCard       = isset($data->SaveCard) ? !!$data->SaveCard : false;
+        $this->brand          = isset($data->Brand) ? $data->Brand : null;
+        $this->cardToken      = isset($data->CardToken) ? $data->CardToken : null;
+        $this->links          = isset($data->Links) ? $data->Links : new \stdClass();
+        $this->customerName   = isset($data->CustomerName) ? $data->CustomerName : null;
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        return get_object_vars($this);
     }
 
     /**
@@ -77,6 +135,7 @@ class CreditCard implements \JsonSerializable, CieloSerializable
     public function setCardNumber($cardNumber)
     {
         $this->cardNumber = $cardNumber;
+
         return $this;
     }
 
@@ -96,6 +155,7 @@ class CreditCard implements \JsonSerializable, CieloSerializable
     public function setHolder($holder)
     {
         $this->holder = $holder;
+
         return $this;
     }
 
@@ -115,6 +175,7 @@ class CreditCard implements \JsonSerializable, CieloSerializable
     public function setExpirationDate($expirationDate)
     {
         $this->expirationDate = $expirationDate;
+
         return $this;
     }
 
@@ -134,6 +195,7 @@ class CreditCard implements \JsonSerializable, CieloSerializable
     public function setSecurityCode($securityCode)
     {
         $this->securityCode = $securityCode;
+
         return $this;
     }
 
@@ -153,6 +215,7 @@ class CreditCard implements \JsonSerializable, CieloSerializable
     public function setSaveCard($saveCard)
     {
         $this->saveCard = $saveCard;
+
         return $this;
     }
 
@@ -172,6 +235,7 @@ class CreditCard implements \JsonSerializable, CieloSerializable
     public function setBrand($brand)
     {
         $this->brand = $brand;
+
         return $this;
     }
 
@@ -191,6 +255,7 @@ class CreditCard implements \JsonSerializable, CieloSerializable
     public function setCardToken($cardToken)
     {
         $this->cardToken = $cardToken;
+
         return $this;
     }
 
@@ -224,18 +289,5 @@ class CreditCard implements \JsonSerializable, CieloSerializable
     public function setLinks($links)
     {
         $this->links = $links;
-    }
-
-    /**
-     * @param string $json
-     * @return CreditCard
-     */
-    public static function fromJson($json)
-    {
-        $object = \json_decode($json);
-        $cardToken = new CreditCard();
-        $cardToken->populate($object);
-
-        return $cardToken;
     }
 }
