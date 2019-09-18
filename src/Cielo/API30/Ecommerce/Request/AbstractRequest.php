@@ -3,6 +3,7 @@
 namespace Cielo\API30\Ecommerce\Request;
 
 use Cielo\API30\Merchant;
+use Psr\Log\LoggerInterface;
 
 /**
  * Class AbstractSaleRequest
@@ -13,15 +14,18 @@ abstract class AbstractRequest
 {
 
     private $merchant;
+    private $logger;
 
-    /**
-     * AbstractSaleRequest constructor.
-     *
-     * @param Merchant $merchant
-     */
-    public function __construct(Merchant $merchant)
+	/**
+	 * AbstractSaleRequest constructor.
+	 *
+	 * @param Merchant $merchant
+	 * @param LoggerInterface|null $logger
+	 */
+    public function __construct(Merchant $merchant, LoggerInterface $logger = null)
     {
         $this->merchant = $merchant;
+        $this->logger = $logger;
     }
 
     /**
@@ -78,8 +82,31 @@ abstract class AbstractRequest
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
+	    if ($this->logger !== null) {
+		    $this->logger->debug(
+			    trim(
+				    sprintf("Requisição\n%s %s\n%s\n\n%s\n\n",
+					    $method, $url,
+					    implode("\n", $headers),
+					    preg_replace('/("cardnumber"):"([^"]{6})[^"]+([^"]{4})"/i', '$1:"$2******$3"', json_encode($content))
+				    )
+			    )
+		    );
+	    }
+
         $response   = curl_exec($curl);
         $statusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+	    if ($this->logger !== null) {
+		    $this->logger->debug(
+			    trim(
+				    sprintf("Resposta\n%d\n\n%s\n\n",
+					    $statusCode,
+				        $response
+				    )
+			    )
+		    );
+	    }
 
         if (curl_errno($curl)) {
             throw new \RuntimeException('Curl error: ' . curl_error($curl));
