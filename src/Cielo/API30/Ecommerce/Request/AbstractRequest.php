@@ -82,34 +82,31 @@ abstract class AbstractRequest
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
-	    if ($this->logger !== null) {
-		    $this->logger->debug(
-			    trim(
-				    sprintf("Requisição\n%s %s\n%s\n\n%s\n\n",
-					    $method, $url,
-					    implode("\n", $headers),
-					    preg_replace('/("cardnumber"):"([^"]{6})[^"]+([^"]{4})"/i', '$1:"$2******$3"', json_encode($content))
-				    )
-			    )
-		    );
-	    }
+        if ($this->logger !== null) {
+            $this->logger->debug('Requisição', [
+                    sprintf('%s %s', $method, $url),
+                    $headers,
+                    json_decode(preg_replace('/("cardnumber"):"([^"]{6})[^"]+([^"]{4})"/i', '$1:"$2******$3"', json_encode($content)))
+                ]
+            );
+        }
 
         $response   = curl_exec($curl);
         $statusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
-	    if ($this->logger !== null) {
-		    $this->logger->debug(
-			    trim(
-				    sprintf("Resposta\n%d\n\n%s\n\n",
-					    $statusCode,
-				        $response
-				    )
-			    )
-		    );
-	    }
+        if ($this->logger !== null) {
+            $this->logger->debug('Resposta', [
+                sprintf('Código de status: %s', $statusCode),
+                json_decode($response)
+            ]);
+        }
 
         if (curl_errno($curl)) {
-            throw new \RuntimeException('Curl error: ' . curl_error($curl));
+            $message = sprintf('cURL error[%s]: %s', curl_errno($curl), curl_error($curl));
+
+            $this->logger->error($message);
+
+            throw new \RuntimeException($message);
         }
 
         curl_close($curl);
