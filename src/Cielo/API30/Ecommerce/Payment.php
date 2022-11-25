@@ -42,6 +42,8 @@ class Payment implements \JsonSerializable
 
     private $debitCard;
 
+    private $wallet;
+
     private $authenticationUrl;
 
     private $tid;
@@ -161,6 +163,11 @@ class Payment implements \JsonSerializable
             $this->debitCard->populate($data->DebitCard);
         }
 
+        if (isset($data->Wallet)) {
+            $this->wallet = new Wallet();
+            $this->wallet->populate($data->Wallet);
+        }
+
         $this->expirationDate = isset($data->ExpirationDate) ? $data->ExpirationDate : null;
         $this->url            = isset($data->Url) ? $data->Url : null;
         $this->boletoNumber   = isset($data->BoletoNumber) ? $data->BoletoNumber : null;
@@ -249,6 +256,16 @@ class Payment implements \JsonSerializable
         $this->setDebitCard($card);
 
         return $card;
+    }
+
+    public function newWallet($type)
+    {
+        $wallet = new Wallet($type);
+
+        $this->setType(self::PAYMENTTYPE_CREDITCARD);
+        $this->setWallet($wallet);
+
+        return $wallet;
     }
 
     /**
@@ -451,6 +468,18 @@ class Payment implements \JsonSerializable
     public function getAuthenticationUrl()
     {
         return $this->authenticationUrl;
+    }
+
+    public function getWallet()
+    {
+        return $this->wallet;
+    }
+
+    public function setWallet($wallet)
+    {
+        $this->wallet = $wallet;
+
+        return $this;
     }
 
     /**
