@@ -1144,4 +1144,24 @@ class Payment implements \JsonSerializable
 
         return $this;
     }
+
+    function getQrCodeBase64()
+    {
+        return $this->qrCodeBase64;
+    }
+
+    function setQrCodeBase64($qrCodeBase64)
+    {
+        $this->qrCodeBase64 = $qrCodeBase64;
+    }
+
+    function getQrCodeString()
+    {
+        return $this->qrCodeString;
+    }
+
+    function setQrCodeString($qrCodeString)
+    {
+        $this->qrCodeString = $qrCodeString;
+    }
 }
