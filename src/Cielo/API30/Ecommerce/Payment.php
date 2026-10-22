@@ -18,11 +18,15 @@ class Payment implements \JsonSerializable
 
     const PAYMENTTYPE_BOLETO = 'Boleto';
 
+    const PAYMENTTYPE_PIX = 'Pix';
+
     const PROVIDER_BRADESCO = 'Bradesco';
 
-    const PROVIDER_BANCO_DO_BRASIL = 'BancoDoBrasil';
+    const PROVIDER_BANCO_DO_BRASIL = 'BancoDoBrasil';    
 
     const PROVIDER_SIMULADO = 'Simulado';
+
+    const PROVIDER_CIELO2 = 'Cielo2';
 
     private $serviceTaxAmount;
 
@@ -109,6 +113,10 @@ class Payment implements \JsonSerializable
     private $identification;
 
     private $instructions;
+
+    private $qrCodeBase64;
+
+    private $qrCodeString;
 
     /**
      * Payment constructor.
@@ -201,6 +209,9 @@ class Payment implements \JsonSerializable
         $this->demonstrative  = isset($data->Demonstrative) ? $data->Demonstrative : null;
         $this->identification = isset($data->Identification) ? $data->Identification : null;
         $this->instructions   = isset($data->Instructions) ? $data->Instructions : null;
+
+        $this->qrCodeBase64 = isset($data->QrCodeBase64Image) ? $data->QrCodeBase64Image : null;
+        $this->qrCodeString = isset($data->QrCodeString) ? $data->QrCodeString : null;
     }
 
     /**
